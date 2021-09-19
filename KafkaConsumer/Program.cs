@@ -14,6 +14,12 @@ namespace KafkaConsumer
                 BootstrapServers = "localhost:9092",
                 GroupId = "quickstart-events"
             };
+            Task.Run(() => KafkaConsumer(config));
+            Console.WriteLine("finalizado a execução");
+            Console.ReadKey();
+        }
+        private static void KafkaConsumer(ConsumerConfig config)
+        {
             using (var consumer = new ConsumerBuilder<Ignore, string>(config).Build())
             {
                 consumer.Subscribe("quickstart-events");
